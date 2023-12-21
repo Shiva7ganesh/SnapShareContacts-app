@@ -2,4 +2,9 @@
     <string name="app_name">SnapShare Contacts</string>
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="show_my_qr">Show My QR</string>
+    <!-- to toggle the open close button of the navigation drawer -->
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

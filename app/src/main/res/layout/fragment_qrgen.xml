@@ -1,27 +1,32 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- layout_qr_generation.xml -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="0dp">
+    <include layout="@layout/toolbar"/>
+
+    <!-- Include the toolbar layout -->
 
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name" />
+        android:layout_height="59dp"
+        android:hint="    Name" />
 
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone Number" />
+        android:layout_height="57dp"
+        android:hint="    Phone Number" />
 
     <Button
         android:id="@+id/btnGenerateQR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FF5722"
+        android:backgroundTint="@color/lavender"
         android:text="Generate QR Code"
         android:textColor="#F8F2F2" />
 
@@ -33,5 +38,4 @@
         android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter" />
-
 </LinearLayout>

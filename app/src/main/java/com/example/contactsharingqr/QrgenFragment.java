@@ -1,16 +1,21 @@
 package com.example.contactsharingqr;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.fragment.app.Fragment;
+
 import com.google.zxing.WriterException;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-public class QRGenerationActivity extends AppCompatActivity {
+public class QrgenFragment extends Fragment {
 
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String NAME_KEY = "name";
@@ -20,26 +25,34 @@ public class QRGenerationActivity extends AppCompatActivity {
     private EditText editTextPhone;
     private ImageView imageViewQR;
 
+    public QrgenFragment() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qr_generation);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_qrgen, container, false);
 
-        editTextName = findViewById(R.id.editTextName);
-        editTextPhone = findViewById(R.id.editTextPhone);
-        imageViewQR = findViewById(R.id.imageViewQR);
-        Button btnGenerateQR = findViewById(R.id.btnGenerateQR);
+        editTextName = view.findViewById(R.id.editTextName);
+        editTextPhone = view.findViewById(R.id.editTextPhone);
+        imageViewQR = view.findViewById(R.id.imageViewQR);
+        Button btnGenerateQR = view.findViewById(R.id.btnGenerateQR);
 
-        btnGenerateQR.setOnClickListener(view -> {
-            String name = editTextName.getText().toString().trim();
-            String phone = editTextPhone.getText().toString().trim();
+        btnGenerateQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = editTextName.getText().toString().trim();
+                String phone = editTextPhone.getText().toString().trim();
 
-            if (!name.isEmpty() && !phone.isEmpty()) {
-                // Save name and phone in SharedPreferences for future use
-                saveData(name, phone);
+                if (!name.isEmpty() && !phone.isEmpty()) {
+                    // Save name and phone in SharedPreferences for future use
+                    saveData(name, phone);
 
-                // Generate and display QR code
-                generateAndDisplayQR(name, phone);
+                    // Generate and display QR code
+                    generateAndDisplayQR(name, phone);
+                    hideKeyboard(v);
+                }
             }
         });
 
@@ -53,6 +66,8 @@ public class QRGenerationActivity extends AppCompatActivity {
             editTextPhone.setText(storedPhone);
             generateAndDisplayQR(storedName, storedPhone);
         }
+
+        return view;
     }
 
     private void generateAndDisplayQR(String name, String phone) {
@@ -82,14 +97,18 @@ public class QRGenerationActivity extends AppCompatActivity {
     }
 
     private void saveData(String name, String phone) {
-        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = requireActivity().getSharedPreferences(PREFS_NAME, requireActivity().MODE_PRIVATE).edit();
         editor.putString(NAME_KEY, name);
         editor.putString(PHONE_KEY, phone);
         editor.apply();
     }
 
     private String getData(String key) {
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences prefs = requireActivity().getSharedPreferences(PREFS_NAME, requireActivity().MODE_PRIVATE);
         return prefs.getString(key, null);
+    }
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(requireActivity().INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

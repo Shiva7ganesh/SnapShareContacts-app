@@ -38,7 +38,10 @@ public class QrscanFragment extends Fragment {
         // Check and request camera permission
         setupCodeScanner(getView());
     }
-
+    public void onPause() {
+        mCodeScanner.releaseResources();
+        super.onPause();
+    }
     private void setupCodeScanner(View view) {
         CodeScannerView scannerView = view.findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(requireActivity(), scannerView);

@@ -77,8 +77,13 @@ public class QrscanFragment extends Fragment {
         intent.putExtra(ContactsContract.Intents.Insert.NAME, contact.getName()); // Set the contact name
         intent.putExtra(ContactsContract.Intents.Insert.PHONE, contact.getPhoneNumber()); // Set the contact phone number
 
-        // You can set additional contact information here
+        // Set the email address if it exists
+        if (contact.getEmail() != null && !contact.getEmail().isEmpty()) {
+            intent.putExtra(ContactsContract.Intents.Insert.EMAIL, contact.getEmail());
+            intent.putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK);
+        }
 
+        // Start the activity
         startActivity(intent);
         requireActivity().finish(); // Close this activity after initiating the contact save page
     }

@@ -1,41 +1,11 @@
-<!-- layout_qr_generation.xml -->
-
+<!-- main_layout.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="0dp">
-    <include layout="@layout/toolbar"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- Include the toolbar layout -->
+    <!-- Include the QR generation layout -->
+    <include layout="@layout/header_layout" />
+    <include layout="@layout/qrgen_layout" />
 
-    <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:hint="    Name" />
-
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:hint="    Phone Number" />
-
-    <Button
-        android:id="@+id/btnGenerateQR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/lavender"
-        android:text="Generate QR Code"
-        android:textColor="#F8F2F2" />
-
-    <ImageView
-        android:id="@+id/imageViewQR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter" />
 </LinearLayout>

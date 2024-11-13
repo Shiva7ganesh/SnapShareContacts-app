@@ -20,7 +20,7 @@
 1. Download the app from the [Google Play Store](https://play.google.com/store/apps/details?id=com.ultanix.contactsharingqr).
 2. Alternatively, clone this repository and run it in Android Studio:
    ```bash
-   git clone https://github.com/yourusername/snapshare-contacts.git
+   git clone https://github.com/Shiva7ganesh/SnapShareContacts-app.git
    ```
 3. Open the project in **Android Studio** and run it on an emulator or physical device.
 
